@@ -17,10 +17,11 @@ from openff.toolkit.topology import Topology, Molecule
 from openff.toolkit.utils.toolkits import RDKitToolkitWrapper
 
 # read in molecules + positions
-gro=app.GromacsGroFile(pwd+'/Y6ethyls_pbe0-pvtz.gro') #pwd+'/single-y6/espaloma_on_single_y6/dimer/Y6_2_out.gro')
-positions = gro.getPositions(asNumpy=True)
+sdf=app.PDBFile(pwd+'/../0001-smi23d/NFA000006.pdb')
+                       #'/Y6ethyls_pbe0-pvtz.gro') #pwd+'/single-y6/espaloma_on_single_y6/dimer/Y6_2_out.gro')
+positions = sdf.getPositions(asNumpy=True)
 
-mol_filepath = get_data_file_path(pwd+'/Y6ethyls_pbe0-pvtz.mol') 
+mol_filepath = get_data_file_path(pwd+'/../0001-smi23d/NFA000006.sdf') 
         #pwd+'/single-y6/espaloma_on_single_y6/dimer/Y6_2_out.mol') 
 
 # See here: https://docs.openforcefield.org/projects/toolkit/en/stable/users/molecule_cookbook.html#from-small-molecule-pdb-file
@@ -94,7 +95,7 @@ simulation.minimizeEnergy()
 simulation.reporters.append(app.pdbreporter.PDBReporter('output.pdb', 1000))
 #simulation.reporters.append(StateDataReporter(stdout, 1000, step=True,
 #        potentialEnergy=True, temperature=True))
-simulation.step(10000)
+simulation.step(100000)
 
 print(simulation)
 
